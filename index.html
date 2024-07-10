@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokédex</title>
     <script src="./pokemon.js" defer></script>
+    <script src="./search.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <main class="main">
-        <header class="header-home">
+        <header class="header home">
             <div class="container">
                 <div class="logo-wrapper">
-                    <img src="/assets/pokeball.svg" alt="pokeball">
+                    <a href="./index.html">
+                        <img src="./assets/pokeball.svg" alt="pokeball">
+                    </a>
                     <h1>Pokédex</h1>
                 </div>
                 <div class="search-wrapper">
@@ -43,10 +47,9 @@
         </header>
         <section class="pokemon-list">
             <div class="container">
-                <div class="list-wrapper">
-                    <div id="not-found-message">Pokémon not found!</div>
-                </div>
+                <div class="list-wrapper"></div>
             </div>
+            <div id="not-found-message">Pokémon not found!</div>
         </section>
     </main>
 </body>

@@ -22,7 +22,7 @@ async function fetchPokemonDataBeforeRedirect(id) {
         fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => 
             res.json()
         ),
-    ])
+    ]);
     return true;
     }
     catch (error) {
@@ -84,4 +84,13 @@ function handleSearch() {
     } else {
         notFoundMessage.style.display = "none";
     }
+}
+
+const closeButton = document.querySelector(".search-close-icon");
+closeButton.addEventListener("click", clearSearch);
+
+function clearSearch() {
+    searchInput.value = "";
+    displayPokemons(allPokemons);
+    notFoundMessage.style.display = "none";
 }
