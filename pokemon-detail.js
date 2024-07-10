@@ -99,33 +99,46 @@ function rgbaFromHex(hexColor) {
 
 function setTypeBackgroundColor(pokemon) {
     const mainType = pokemon.types[0].type.name;
-    const color = typeColors[mainType];
+    const mainColor = typeColors[mainType];
 
-    if(!color) {
+    if (!mainColor) {
         console.warn(`Color not defined for type: ${mainType}`);
         return;
     }
 
     const detailMainElement = document.querySelector(".detail-main");
-    setElementStyles([detailMainElement], "backgroundColor", color);
-    setElementStyles([detailMainElement], "borderColor", color);
+    setElementStyles([detailMainElement], "backgroundColor", mainColor);
+    setElementStyles([detailMainElement], "borderColor", mainColor);
 
-    setElementStyles(document.querySelectorAll(".power-wrapper > p"), "backgroundColor", color);
-    setElementStyles(document.querySelectorAll(".stats-wrap p.stats"), "color", color);
-    setElementStyles(document.querySelectorAll(".stats-wrap .progress-bar"), "color", color);
+    setElementStyles(document.querySelectorAll(".power-wrapper > p"), "backgroundColor", mainColor);
+    setElementStyles(document.querySelectorAll(".stats-wrap p.stats"), "color", mainColor);
+    setElementStyles(document.querySelectorAll(".stats-wrap .progress-bar"), "color", mainColor);
 
-    const rgbaColor = rgbaFromHex(color);
+    const rgbaColor = rgbaFromHex(mainColor);
     const styleTag = document.createElement("style");
     styleTag.innerHTML = `
     .stats-wrap .progress-bar::-webkit-progress-bar {
     background-color: rgba(${rgbaColor}, 0.5);
     }
     .stats-wrap .progress-bar::-webkit-progress-value {
-    background-color: ${color};
+    background-color: ${mainColor};
     }
     `;
 
     document.head.appendChild(styleTag);
+
+    if (pokemon.types.length > 1) {
+        const secondaryType = pokemon.types[1].type.name;
+        const secondaryColor = typeColors[secondaryType];
+
+        if (!secondaryColor) {
+            console.warn(`Color not defined for type: ${secondaryType}`);
+            return;
+        }
+
+        const secondaryTypeElements = document.querySelectorAll(`.type.${secondaryType}`);
+        setElementStyles(secondaryTypeElements, "backgroundColor", secondaryColor);
+    }
 }
 
 function createAndAppendElement(parent, tag, options = {}) {
@@ -210,7 +223,6 @@ function displayPokemonDetails(pokemon) {
     });
 
     setTypeBackgroundColor(pokemon);
-
 }
 
 function getEnglishFlavorText(pokemonSpecies) {
