@@ -116,7 +116,10 @@ body {
 .logo-wrapper > h1 {
   color: var(--grayscale-white);
 }
-
+.logo-wrapper a {
+  text-decoration: none;
+  color: var(--grayscale-white);
+}
 .logo-wrapper > img {
   margin-right: 16px;
 }
@@ -529,4 +532,8 @@ div#not-found-message {
   height: max-content;
   border-color: transparent;
   background-color: transparent;
+}
+
+.a {
+  font-style: none;
 }
